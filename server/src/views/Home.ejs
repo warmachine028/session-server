@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="https://example.com/favicon.ico" type="image/x-icon" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<title>Session Server</title>
+	</head>
+	<body>
+		<h1 class="bg-red-400">Hello <%= user.name %></h1>
+		<button class="ring-1 ">
+			<form action="auth/logout" method="POST">
+				<button type="submit" class="ring-1">Logout</button>
+			</form>
+		</button>
+	</body>
+</html>

@@ -1,0 +1,9 @@
+{
+    "depcheck": {
+        "ignoreMatches": [
+            "ejs",
+            "@types/express-session",
+            "@types/express"
+        ]
+    }
+}
