@@ -12,3 +12,8 @@ export const authRoute = (req, res, next) => {
 	}
 	next()
 }
+
+export const storeUser = (req, res, next) => {
+	res.locals.user = req.session.user
+	next()
+}

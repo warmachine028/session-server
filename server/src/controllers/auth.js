@@ -5,7 +5,8 @@ dotenv.config()
 
 export const signUp = async (req, res) => {
 	try {
-		const user = req.body.user
+		const user = req.body
+		const { email, password } = user
 		// Check for missing credentials
 		if (!email || !password) {
 			return res.status(400).json({ error: 'Email and password are required' })
@@ -15,13 +16,17 @@ export const signUp = async (req, res) => {
 		if (exists) {
 			res.status(409).json({ error: 'user already exists with this email' })
 		}
-		user.id = users[users.length - 1].id + 1
-		users.push(user)
-		req.session.user = user
+		const newUser = {
+			id: users[users.length - 1].id + 1,
+			email,
+			name: `Person ${users[users.length - 1].id + 1}`
+		}
+		users.push(newUser)
+		req.session.user = newUser
 		// Send token in response
-		res.status(200).json(user)
+		res.status(200).json(newUser)
 	} catch (error) {
-		res.status(500).json({ error: 'Internal server error' })
+		res.status(500).json({ error: error.message })
 	}
 }
 
@@ -53,18 +58,14 @@ export const logIn = async (req, res) => {
 
 export const logOut = (req, res) => {
 	try {
-		const user = req.session.user
-		if (user) {
-			req.session.destroy((error) => {
-				if (error) {
-                    console.error(error)
-					throw error
-				}
-				res.clearCookie(process.env.SESSION_NAME)
-			})
-			return res.status(200).json({ message: 'Successfully logged out' })
-		}
-		throw new Error('Something went wrong')
+		req.session.destroy((error) => {
+			if (error) {
+				console.error(error)
+				throw error
+			}
+		})
+		res.clearCookie(process.env.SESSION_NAME)
+		res.status(200).json({ message: 'Successfully logged out' })
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
