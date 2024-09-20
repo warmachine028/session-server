@@ -9,7 +9,7 @@ import { userRoutes, authRoutes } from './routes/index.js'
 import { privateRoute, authRoute, storeUser } from './middlewares/index.js'
 
 dotenv.config()
-
+console.log(process.env.NODE_ENV)
 const __dirname = fileURLToPath(import.meta.url)
 
 const PORT = process.env.PORT || 3000
