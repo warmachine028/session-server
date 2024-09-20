@@ -26,7 +26,7 @@ app.get('/', (_, res) => res.send('Hello from session server'))
 			cookie: {
 				maxAge: 60 * 1000 * 60 * 3,
 				httpOnly: true,
-				secure: process.env.NODE_ENV === 'production'
+				// secure: process.env.NODE_ENV === 'production'
 			} // 3 hours
 		}),
 		cookieParser(),
