@@ -9,7 +9,6 @@ import { userRoutes, authRoutes } from './routes/index.js'
 import { privateRoute, authRoute, storeUser } from './middlewares/index.js'
 
 dotenv.config()
-console.log(process.env.NODE_ENV)
 const __dirname = fileURLToPath(import.meta.url)
 
 const PORT = process.env.PORT || 3000
@@ -26,7 +25,7 @@ app.get('/', (_, res) => res.send('Hello from session server'))
 			cookie: {
 				maxAge: 60 * 1000 * 60 * 3,
 				httpOnly: true,
-				// secure: process.env.NODE_ENV === 'production'
+				secure: process.env.NODE_ENV === 'production'
 			} // 3 hours
 		}),
 		cookieParser(),
