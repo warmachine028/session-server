@@ -21,17 +21,18 @@ app.get('/', (_, res) => res.send('Hello from session server'))
 			secret: process.env.SESSION_SECRET,
 			resave: true,
 			saveUninitialized: false,
-			cookie: { maxAge: 60 * 1000 * 60 * 3 } // 3 hours
+			cookie: { maxAge: 60 * 1000 * 60 * 3, httpOnly: true } // 3 hours
 		}),
 		express.static(path.resolve(path.dirname(__dirname), '../public')),
-		express.json()
+		express.json(),
+		storeUser
 	)
 	.use('/auth', authRoutes)
 	.use('/users', privateRoute, userRoutes)
 	// view stuff
 	.set('views', path.join(path.dirname(__dirname), 'views'))
 	.set('view engine', 'ejs')
-	.use(storeUser)
 	.get('/home', privateRoute, (_, res) => res.render('Home'))
 	.get('/login', authRoute, (_, res) => res.render('Login', { error: null }))
+	.get('/signup', authRoute, (_, res) => res.render('Signup', { error: null }))
 	.listen(PORT, () => console.log(`Server running on port ${PORT} 🚀🚀`))

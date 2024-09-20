@@ -5,14 +5,48 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="shortcut icon" href="https://example.com/favicon.ico" type="image/x-icon" />
 		<script src="https://cdn.tailwindcss.com"></script>
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 		<title>Session Server</title>
 	</head>
-	<body>
-		<h1 class="bg-red-400">Hello <%= user.name %></h1>
-		<button class="ring-1 ">
-			<form action="auth/logout" method="POST">
-				<button type="submit" class="ring-1">Logout</button>
-			</form>
-		</button>
+	<body class="bg-zinc-900">
+		<nav class="bg-gray-900 text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex items-center justify-between h-16">
+					<div class="flex items-center">
+						<a href="/home" class="flex items-center">
+							<div class="flex-shrink-0">
+								<img class="h-8 w-8" src="favicon.ico" alt="Session Server">
+							</div>
+							<div class="ml-3 text-white font-bold text-lg">Session Server</div>
+						</a>
+					</div>
+					<div class="flex items-center">
+						<div class="flex items-center mr-4">
+							<div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white font-bold mr-2 relative group">
+								<img src="https://mui.com/static/images/avatar/3.jpg" alt="User Avatar" class="w-full h-full object-cover rounded-full">
+								<div class="absolute inset-0 rounded-full border-2 border-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+							</div>
+							<span class="text-gray-200">Hello, <%= user.name %></span>
+						</div>
+						<a href="https://github.com/warmachine028/session-server" target="_blank" class="flex items-center mr-4">
+							<i class='bx bxl-github text-white bx-sm'></i>
+							<span class="text-gray-200">1k</span>
+						</a>
+						<form action="auth/logout" method="POST">
+							<button type="submit" class="bg-indigo-700 hover:bg-indigo-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400">
+								Logout
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+			<div class="px-4 py-6 sm:px-0">
+				<h1 class="text-3xl font-bold text-white">Welcome to Session Server</h1>
+				<p class="mt-4 text-gray-400">This is a professional homepage for your session-based application.</p>
+			</div>
+		</main>
 	</body>
 </html>
