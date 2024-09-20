@@ -2,6 +2,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 import express from 'express'
 import session from 'express-session'
+import csrf from 'csurf'
+import cookieParser from 'cookie-parser'
 import { fileURLToPath } from 'url'
 import { userRoutes, authRoutes } from './routes/index.js'
 import { privateRoute, authRoute, storeUser } from './middlewares/index.js'
@@ -21,11 +23,16 @@ app.get('/', (_, res) => res.send('Hello from session server'))
 			secret: process.env.SESSION_SECRET,
 			resave: true,
 			saveUninitialized: false,
-			cookie: { maxAge: 60 * 1000 * 60 * 3, httpOnly: true, secure: process.env.NODE_ENV === 'production' } // 3 hours
+			cookie: {
+				maxAge: 60 * 1000 * 60 * 3,
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production'
+			} // 3 hours
 		}),
+		cookieParser(),
+		csrf({ cookie: true }),
+		storeUser,
 		express.static(path.resolve(path.dirname(__dirname), '../public')),
-		express.json(),
-		storeUser
 	)
 	.use('/auth', authRoutes)
 	.use('/users', privateRoute, userRoutes)

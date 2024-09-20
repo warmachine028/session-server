@@ -14,6 +14,7 @@ export const authRoute = (req, res, next) => {
 }
 
 export const storeUser = (req, res, next) => {
+	res.locals.csrfToken = req.csrfToken()
 	res.locals.user = req.session.user
 	next()
 }
