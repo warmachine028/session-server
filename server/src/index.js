@@ -9,6 +9,7 @@ import { userRoutes, authRoutes } from './routes/index.js'
 import { privateRoute, authRoute, storeUser } from './middlewares/index.js'
 
 dotenv.config()
+
 const __dirname = fileURLToPath(import.meta.url)
 
 const PORT = process.env.PORT || 3000
@@ -17,6 +18,7 @@ const app = express()
 app.get('/', (_, res) => res.send('Hello from session server'))
 	.use(
 		express.urlencoded({ extended: false }),
+		express.json(),
 		session({
 			name: process.env.SESSION_NAME,
 			secret: process.env.SESSION_SECRET,
@@ -25,13 +27,13 @@ app.get('/', (_, res) => res.send('Hello from session server'))
 			cookie: {
 				maxAge: 60 * 1000 * 60 * 3,
 				httpOnly: true,
-				secure: process.env.NODE_ENV === 'production'
+				// secure: process.env.NODE_ENV === 'production'
 			} // 3 hours
 		}),
 		cookieParser(),
-		csrf({ cookie: true }),
+		// csrf({ cookie: true }),
 		storeUser,
-		express.static(path.resolve(path.dirname(__dirname), '../public')),
+		express.static(path.resolve(path.dirname(__dirname), '../public'))
 	)
 	.use('/auth', authRoutes)
 	.use('/users', privateRoute, userRoutes)
