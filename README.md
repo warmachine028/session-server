@@ -1,4 +1,4 @@
-    updated on: 16th January 2026, Friday
+    updated on: 09th March 2026, Monday
 
 <div align=center>
     <a href="https://session-server.onrender.com">
@@ -98,4 +98,4 @@ $> bun run dev
 [line]: https://user-images.githubusercontent.com/75939390/137615281-3a875960-92cc-407f-97fe-fd2319bdb252.png
 [License]: https://github.com/warmachine028/session-server/blob/main/LICENSE
 [render.com]: (https://render.com)
-<!-- 16/01/26 -->
+<!-- 09/03/26 -->
